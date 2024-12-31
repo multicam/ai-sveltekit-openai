@@ -1,38 +1,56 @@
-# create-svelte
+# AI SvelteKit OpenAI Chat Application
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A modern chat application built with SvelteKit and OpenAI's GPT API.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Real-time chat interface with OpenAI's GPT models
+- TypeScript support for better type safety
+- Modern and responsive UI
+- Error handling and loading states
+- Modular and maintainable code structure
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Project Structure
 
-# create a new project in my-app
-npm create svelte@latest my-app
+```
+src/
+├── lib/
+│   ├── components/    # Reusable Svelte components
+│   ├── services/     # External service integrations
+│   └── types/        # TypeScript type definitions
+├── routes/
+│   ├── api/          # API endpoints
+│   └── ...           # Page routes
 ```
 
-## Developing
+## Setup
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run dev
+## Development
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run check` - Type-check the codebase
+- `npm run lint` - Lint the codebase
+- `npm run format` - Format the codebase
 
-## Building
+## Technologies Used
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- SvelteKit
+- TypeScript
+- OpenAI API
+- Vite
