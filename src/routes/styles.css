@@ -12,11 +12,11 @@
 	--color-text: rgba(0, 0, 0, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
-	font-family: var(--font-body);
-	color: var(--color-text);
 }
 
 body {
+	font-family: var(--font-body);
+	color: var(--color-text);
 	min-height: 100vh;
 	margin: 0;
 	background-attachment: fixed;

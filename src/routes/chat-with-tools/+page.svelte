@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useChat } from 'ai/svelte';
-  import type { ChatRequest, ToolCallHandler } from 'ai';
-  import { nanoid } from 'ai';
+  import { useChat } from '@ai-sdk/svelte';
+  import type { ChatRequest, ToolCallHandler } from '@ai-sdk/svelte';
+  import { generateId } from 'ai';
 
   const toolCallHandler: ToolCallHandler = async (chatMessages, toolCalls) => {
     let handledFunction = false;
@@ -23,7 +23,7 @@
             handledFunction = true;
 
             chatMessages.push({
-              id: nanoid(),
+              id: generateId(),
               tool_call_id: tool.id,
               name: tool.function.name,
               role: 'tool' as const,

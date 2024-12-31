@@ -1,8 +1,7 @@
 import OpenAI from 'openai';
 import {
   OpenAIStream,
-  StreamingTextResponse,
-  experimental_StreamData,
+  StreamingTextResponse
 } from 'ai';
 
 import { env } from '$env/dynamic/private';
@@ -11,6 +10,7 @@ import { env } from '$env/dynamic/private';
 // import { OPENAI_API_KEY } from '$env/static/private'
 
 import type { RequestHandler } from './$types';
+const {log} = console, {keys} = Object
 
 // Create an OpenAI API client
 const openai = new OpenAI({
@@ -28,19 +28,16 @@ export const POST = (async ({ request }) => {
     messages: [{ role: 'user', content: prompt }],
   });
 
-  // optional: use stream data
-  const data = new experimental_StreamData();
 
-  data.append({ test: 'value' });
 
   // Convert the response into a friendly text-stream
   const stream = OpenAIStream(response, {
     onFinal(completion) {
-      data.close();
+      log(keys(completion))
     },
-    experimental_streamData: true,
+    stream: true,
   });
 
   // Respond with the stream
-  return new StreamingTextResponse(stream, {}, data);
+  return new StreamingTextResponse(stream, {}, {data: {foo: 'bar'}});
 }) satisfies RequestHandler;

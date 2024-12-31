@@ -1,5 +1,5 @@
 <script>
-	import { useCompletion } from 'ai/svelte'
+	import { useCompletion } from '@ai-sdk/svelte'
 
 	const { completion, input, handleSubmit, data } = useCompletion();
 </script>

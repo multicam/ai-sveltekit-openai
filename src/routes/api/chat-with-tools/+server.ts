@@ -5,7 +5,7 @@ import {
   experimental_StreamData,
   type Tool,
   type ToolCallPayload,
-} from 'ai';
+} from '@vercel/ai';
 import { env } from '$env/dynamic/private';
 
 const openai = new OpenAI({

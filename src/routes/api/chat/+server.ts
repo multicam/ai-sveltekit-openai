@@ -1,34 +1,29 @@
 import OpenAI from 'openai';
-import { OpenAIStream, StreamingTextResponse } from 'ai';
-
+import { json } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
-// You may want to replace the above with a static private env variable
-// for dead-code elimination and build-time type-checking:
-// import { OPENAI_API_KEY } from '$env/static/private'
-
 import type { RequestHandler } from './$types';
 
-// Create an OpenAI API client
 const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY || '',
+    apiKey: env.OPENAI_API_KEY
 });
 
 export const POST = (async ({ request }) => {
-  // Extract the `prompt` from the body of the request
-  const { messages } = await request.json();
+    try {
+        const { messages } = await request.json();
+        
+        const completion = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: messages.map((message: any) => ({
+                content: message.content,
+                role: message.role,
+            })),
+        });
 
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const response = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    stream: true,
-    messages: messages.map((message: any) => ({
-      content: message.content,
-      role: message.role,
-    })),
-  });
-
-  // Convert the response into a friendly text-stream
-  const stream = OpenAIStream(response);
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
+        console.log('completion:', completion);
+        console.log('completion.data.choices[0].message:', completion.choices[0].message);
+        return json(completion.choices[0].message);
+    } catch (error) {
+        console.error('OpenAI API Error:', error);
+        return json({ error: 'Failed to get response from OpenAI' }, { status: 500 });
+    }
 }) satisfies RequestHandler;

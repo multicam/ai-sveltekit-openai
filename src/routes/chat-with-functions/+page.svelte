@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useChat } from 'ai/svelte'
-  import type { FunctionCallHandler } from 'ai'
-  import { nanoid } from 'ai'
+  import { useChat } from '@ai-sdk/svelte'
+  import type { FunctionCallHandler } from '@ai-sdk/svelte'
+  import { generateId } from 'ai'
 
   const functionCallHandler: FunctionCallHandler = async (
     chatMessages,
@@ -19,7 +19,7 @@
           messages: [
             ...chatMessages,
             {
-              id: nanoid(),
+              id: generateId(),
               name: 'eval_code_in_browser',
               role: 'function' as const,
               content: parsedFunctionCallArguments.code,
