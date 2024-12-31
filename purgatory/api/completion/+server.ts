@@ -9,7 +9,7 @@ import { env } from '$env/dynamic/private';
 // for dead-code elimination and build-time type-checking:
 // import { OPENAI_API_KEY } from '$env/static/private'
 
-import type { RequestHandler } from '../../../../src/routes/api/completion/$types';
+import type { RequestHandler } from './$types';
 const {log} = console, {keys} = Object
 
 // Create an OpenAI API client

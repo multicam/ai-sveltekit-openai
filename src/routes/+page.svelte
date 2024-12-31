@@ -48,82 +48,37 @@
 	<meta name="description" content="AI Chat with OpenAI" />
 </svelte:head>
 
-<div class="container">
-    <h1>AI Chat</h1>
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">AI Chat</h1>
     
-    <div class="chat-container">
-        {#each $messages as message}
-            <ChatMessage {message} />
-        {/each}
-        
-        {#if $isLoading}
-            <div class="loading">Loading...</div>
-        {/if}
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="space-y-4 mb-6 max-h-[600px] overflow-y-auto">
+            {#each $messages as message}
+                <ChatMessage {message} />
+            {/each}
+            
+            {#if $isLoading}
+                <div class="text-center text-gray-500">
+                    <div class="animate-pulse">Thinking...</div>
+                </div>
+            {/if}
+        </div>
+
+        <form on:submit={handleSubmit} class="flex gap-4">
+            <input
+                type="text"
+                bind:value={$input}
+                placeholder="Type your message..."
+                disabled={$isLoading}
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            />
+            <button 
+                type="submit" 
+                disabled={$isLoading}
+                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            >
+                Send
+            </button>
+        </form>
     </div>
-
-    <form on:submit={handleSubmit} class="input-form">
-        <input
-            type="text"
-            bind:value={$input}
-            placeholder="Type your message..."
-            disabled={$isLoading}
-        />
-        <button type="submit" disabled={$isLoading}>Send</button>
-    </form>
 </div>
-
-<style>
-    .container {
-        margin: 0 auto;
-        padding: 2rem;
-    }
-
-    h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 2rem;
-    }
-
-    .chat-container {
-        margin: 2rem 0;
-        min-height: 300px;
-        max-height: 600px;
-        overflow-y: auto;
-        padding: 1rem;
-        border: 1px solid #eee;
-        border-radius: 8px;
-    }
-
-    .loading {
-        text-align: center;
-        padding: 1rem;
-        color: #666;
-    }
-
-    .input-form {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    input {
-        flex: 1;
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    button {
-        padding: 0.5rem 1rem;
-        background-color: #0066cc;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-    }
-</style>

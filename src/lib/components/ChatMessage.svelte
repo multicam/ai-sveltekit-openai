@@ -4,31 +4,37 @@
     export let message: Message;
 </script>
 
-<div class="message {message.role}">
-    <div class="content">
+<div class="flex {message.role === 'user' ? 'justify-end' : 'justify-start'}">
+    <div class="{message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-800'} rounded-lg px-4 py-2 max-w-[80%] break-words">
         {message.content}
     </div>
 </div>
 
 <style>
-    .message {
+    .flex {
         padding: 1rem;
         margin: 0.5rem 0;
+    }
+
+    .rounded-lg {
         border-radius: 0.5rem;
     }
 
-    .user {
-        background-color: #e9ecef;
-        margin-left: 2rem;
+    .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
-    .assistant {
-        background-color: #f8f9fa;
-        margin-right: 2rem;
+    .py-2 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 
-    .content {
-        white-space: pre-wrap;
+    .max-w-[80%] {
+        max-width: 80%;
+    }
+
+    .break-words {
         word-wrap: break-word;
     }
 </style>
