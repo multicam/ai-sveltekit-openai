@@ -30,7 +30,7 @@
         padding-bottom: 0.5rem;
     }
 
-    .max-w-[80%] {
+    .max-w-\[80\%\] {
         max-width: 80%;
     }
 
